@@ -5,6 +5,7 @@ import com.study.conexao_solidaria.dto.UsuarioDtoResponse;
 import com.study.conexao_solidaria.dto.UsuarioDtoSolicitacao;
 import com.study.conexao_solidaria.dto.VoluntarioDtoId;
 import com.study.conexao_solidaria.enums.Categorias;
+import com.study.conexao_solidaria.exceptions.ServiceExc;
 import com.study.conexao_solidaria.model.UsuarioModel;
 import com.study.conexao_solidaria.repository.UsuarioRepository;
 import com.study.conexao_solidaria.security.Criptografia;
@@ -102,7 +103,7 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    public UsuarioDtoSolicitacao solicitarAjuda(Long id, CalculadoresDeDistancia CaculadoresDeDistancia) {
+    public UsuarioDtoSolicitacao solicitarAjuda(Long id) {
 
         double menorDistancia = Double.MAX_VALUE;
         UsuarioModel voluntarioMaisProximo = null;

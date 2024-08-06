@@ -5,7 +5,6 @@ import com.study.conexao_solidaria.dto.UsuarioDtoResponse;
 import com.study.conexao_solidaria.dto.UsuarioDtoSolicitacao;
 import com.study.conexao_solidaria.dto.VoluntarioDtoId;
 import com.study.conexao_solidaria.model.UsuarioModel;
-import com.study.conexao_solidaria.service.CalculadoresDeDistancia;
 import com.study.conexao_solidaria.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

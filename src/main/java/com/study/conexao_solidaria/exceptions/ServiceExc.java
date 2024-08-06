@@ -1,6 +1,6 @@
 package com.study.conexao_solidaria.exceptions;
 
-public class ServiceExc {
+public class ServiceExc extends Exception {
 
     public ServiceExc(String message) {
         super(message);
