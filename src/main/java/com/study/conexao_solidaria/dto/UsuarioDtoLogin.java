@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioDtoLongin {
+public class UsuarioDtoLogin {
     private static final long serialVersionUID = 1L;
 
     private Long id;

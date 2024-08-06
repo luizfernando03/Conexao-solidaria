@@ -1,5 +1,6 @@
 package com.study.conexao_solidaria.service;
 
+import com.study.conexao_solidaria.dto.UsuarioDtoLogin;
 import com.study.conexao_solidaria.dto.UsuarioDtoResponse;
 import com.study.conexao_solidaria.dto.UsuarioDtoSolicitacao;
 import com.study.conexao_solidaria.dto.VoluntarioDtoId;
@@ -11,6 +12,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
 
-    public List<UsuarioDtoResponse> buscarVoluntarios(){
+    public List<UsuarioDtoResponse> buscarVoluntarios() {
         List<UsuarioModel> voluntarios = usuarioRepository.findByCategoria(Categorias.VOLUNTARIO);
         List<UsuarioDtoResponse> dtoVoluntarios = new ArrayList<>();
         UsuarioDtoResponse volunt;
@@ -99,34 +101,45 @@ public class UsuarioService {
     public void deletar(Long id) {
         usuarioRepository.deleteById(id);
     }
-//
-//    public UsuarioDtoSolicitacao solicitarAjuda(Long id) {
-//
-//        double menorDistancia = Double.MAX_VALUE;
-//        UsuarioModel voluntarioMaisProximo = null;
-//
-//        UsuarioModel usuarioSolicitante = usuarioRepository.findById(id).get();
-//        List<UsuarioModel> usuarioVoluntarios = usuarioRepository.findByCategoria(Categorias.VOLUNTARIO);
-//
-//        for (UsuarioModel voluntario : usuarioVoluntarios) {
-//            double distancia = CaculadoresDeDistancia.calculaDistancia(usuarioSolicitante.getLatitude(),
-//                    usuarioSolicitante.getLongitude(),
-//                    voluntario.getLatitude(), voluntario.getLongitude());
-//            if (distancia < menorDistancia) {
-//                menorDistancia = distancia;
-//                voluntarioMaisProximo = voluntario;
-//            }
-//        }
-//
-//        if (voluntarioMaisProximo == null) {
-//            throw new RuntimeException("Nenhum voluntário encontrado!");
-//        }else if (menorDistancia > 4000) {
-//            throw new NoSuchElementException("Nenhum voluntário encontrado!");
-//        }
-//
-//        return new UsuarioDtoSolicitacao(voluntarioMaisProximo.getId(),
-//                voluntarioMaisProximo.getNome(),
-//                voluntarioMaisProximo.getTelefone());
-//    }
-//
+
+    public UsuarioDtoSolicitacao solicitarAjuda(Long id, CalculadoresDeDistancia CaculadoresDeDistancia) {
+
+        double menorDistancia = Double.MAX_VALUE;
+        UsuarioModel voluntarioMaisProximo = null;
+
+        UsuarioModel usuarioSolicitante = usuarioRepository.findById(id).get();
+        List<UsuarioModel> usuarioVoluntarios = usuarioRepository.findByCategoria(Categorias.VOLUNTARIO);
+
+        for (UsuarioModel voluntario : usuarioVoluntarios) {
+            double distancia = CaculadoresDeDistancia.calculaDistancia(usuarioSolicitante.getLatitude(),
+                    usuarioSolicitante.getLongitude(),
+                    voluntario.getLatitude(), voluntario.getLongitude());
+            if (distancia < menorDistancia) {
+                menorDistancia = distancia;
+                voluntarioMaisProximo = voluntario;
+            }
+        }
+
+        if (voluntarioMaisProximo == null) {
+            throw new RuntimeException("Nenhum voluntário encontrado!");
+        } else if (menorDistancia > 4000) {
+            throw new NoSuchElementException("Nenhum voluntário encontrado!");
+        }
+
+        return new UsuarioDtoSolicitacao(voluntarioMaisProximo.getId(),
+                voluntarioMaisProximo.getNome(),
+                voluntarioMaisProximo.getTelefone());
+    }
+
+    public UsuarioDtoLogin loginUser(UsuarioModel usuarioModel) throws ServiceExc, NoSuchAlgorithmException {
+
+        UsuarioModel usuario = usuarioRepository.buscarLogin(usuarioModel.getLogin(),
+                Criptografia.md5(usuarioModel.getSenha()));
+
+        if(usuario == null){
+            return null;
+        }
+        return new UsuarioDtoLogin(usuario.getId(), usuario.getCategoria(), usuario.getNome());
+    }
+
 }
