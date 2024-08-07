@@ -18,8 +18,8 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Desabilita CSRF
-                .cors(cors -> cors.disable()) // Desabilita CORS
+                .csrf(csrf -> csrf.disable()) // Desabilitando CSRF
+                .cors(cors -> cors.disable()) // Desabilitando CORS
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/usuarios").permitAll() // Permite acesso público a /usuarios
                         .anyRequest().authenticated() // Requer autenticação para qualquer outra rota
