@@ -1,9 +1,9 @@
 package com.study.conexao_solidaria.controller;
 
-import com.study.conexao_solidaria.dto.UsuarioDtoLogin;
-import com.study.conexao_solidaria.dto.UsuarioDtoResponse;
-import com.study.conexao_solidaria.dto.UsuarioDtoSolicitacao;
-import com.study.conexao_solidaria.dto.VoluntarioDtoId;
+import com.study.conexao_solidaria.model.dto.UsuarioDtoLogin;
+import com.study.conexao_solidaria.model.dto.UsuarioDtoResponse;
+import com.study.conexao_solidaria.model.dto.UsuarioDtoSolicitacao;
+import com.study.conexao_solidaria.model.dto.VoluntarioDtoId;
 import com.study.conexao_solidaria.model.UsuarioModel;
 import com.study.conexao_solidaria.service.UsuarioService;
 import jakarta.validation.Valid;

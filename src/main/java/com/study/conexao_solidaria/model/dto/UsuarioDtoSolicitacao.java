@@ -1,4 +1,4 @@
-package com.study.conexao_solidaria.dto;
+package com.study.conexao_solidaria.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,9 +1,9 @@
 package com.study.conexao_solidaria.service;
 
-import com.study.conexao_solidaria.dto.UsuarioDtoLogin;
-import com.study.conexao_solidaria.dto.UsuarioDtoResponse;
-import com.study.conexao_solidaria.dto.UsuarioDtoSolicitacao;
-import com.study.conexao_solidaria.dto.VoluntarioDtoId;
+import com.study.conexao_solidaria.model.dto.UsuarioDtoLogin;
+import com.study.conexao_solidaria.model.dto.UsuarioDtoResponse;
+import com.study.conexao_solidaria.model.dto.UsuarioDtoSolicitacao;
+import com.study.conexao_solidaria.model.dto.VoluntarioDtoId;
 import com.study.conexao_solidaria.enums.Categorias;
 import com.study.conexao_solidaria.exceptions.ServiceExc;
 import com.study.conexao_solidaria.model.UsuarioModel;
@@ -112,7 +112,7 @@ public class UsuarioService {
         List<UsuarioModel> usuarioVoluntarios = usuarioRepository.findByCategoria(Categorias.VOLUNTARIO);
 
         for (UsuarioModel voluntario : usuarioVoluntarios) {
-            double distancia = CaculadoresDeDistancia.calculaDistancia(usuarioSolicitante.getLatitude(),
+            double distancia = CalculadoresDeDistancia.calculaDistancia(usuarioSolicitante.getLatitude(),
                     usuarioSolicitante.getLongitude(),
                     voluntario.getLatitude(), voluntario.getLongitude());
             if (distancia < menorDistancia) {
