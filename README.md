@@ -18,3 +18,10 @@ Queremos que ninguém se sinta sozinho em seus desafios diários. Se você preci
 ## Executando o projeto
 1. Executar a aplicação em sua IDE de preferência ou através do terminal com o comando abaixo.
 `mvn spring-boot:run`
+
+##  Development team
+
+### Dev :
+- Luiz Fernando De Moura Barbosa.
+
+### Tech Lead  :
